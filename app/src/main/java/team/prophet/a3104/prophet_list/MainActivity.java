@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity
         {
             case R.id.action_about:
                 AlertDialog.Builder ad = new AlertDialog.Builder(this);
-                ad.setTitle(R.string.action_about);
-                ad.setMessage(R.string.author);
+                ad.setTitle(R.string.menu_about);
+                ad.setMessage(R.string.about_author);
 
                 DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()
                 {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 };
 
-                ad.setPositiveButton("確定", listener);
+                ad.setPositiveButton(R.string.about_enter, listener);
                 ad.show();
                 break;
         }

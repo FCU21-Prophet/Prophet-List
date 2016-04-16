@@ -4,8 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_about">關於</string>
-    <string name="author">作者:先知</string>
+    <!--menu string-->
+    <string name="menu_about">關於</string>
+    <string name="about_author">作者:先知</string>
+    <string name="about_enter">確定</string>
 
     <!--menu string-->
     <string name="menu_user">使用者</string>
