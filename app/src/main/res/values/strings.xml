@@ -10,13 +10,13 @@
     <string name="about_enter">Enter</string>
 
     <!--menu string-->
-    <string name="menu_user">user</string>
-    <string name="menu_company">company</string>
-    <string name="menu_school">school</string>
-    <string name="menu_personal">personal</string>
-    <string name="menu_project">project</string>
-    <string name="menu_tag">tag</string>
-    <string name="menu_setting">setting</string>
+    <string name="menu_user">User</string>
+    <string name="menu_company">Company</string>
+    <string name="menu_school">School</string>
+    <string name="menu_personal">Personal</string>
+    <string name="menu_project">Project</string>
+    <string name="menu_tag">Tag</string>
+    <string name="menu_setting">Setting</string>
 
     <!--newTask string-->
     <string name="newTask_title">New Task</string>
