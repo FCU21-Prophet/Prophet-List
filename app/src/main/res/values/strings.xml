@@ -7,4 +7,16 @@
     <string name="action_about">About</string>
     <string name="author">Author:Prophet</string>
 
+    <!--menu string-->
+    <string name="menu_user">user</string>
+    <string name="menu_company">company</string>
+    <string name="menu_school">school</string>
+    <string name="menu_personal">personal</string>
+    <string name="menu_project">project</string>
+    <string name="menu_tag">tag</string>
+    <string name="menu_setting">setting</string>
+
+
+
+
 </resources>

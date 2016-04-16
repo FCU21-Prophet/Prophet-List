@@ -7,5 +7,14 @@
     <string name="action_about">關於</string>
     <string name="author">作者:先知</string>
 
+    <!--menu string-->
+    <string name="menu_user">使用者</string>
+    <string name="menu_company">公司</string>
+    <string name="menu_school">學校</string>
+    <string name="menu_personal">個人</string>
+    <string name="menu_project">專案</string>
+    <string name="menu_tag">標籤</string>
+    <string name="menu_setting">設定</string>
+
 
 </resources>
