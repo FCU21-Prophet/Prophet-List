@@ -16,5 +16,12 @@
     <string name="menu_tag">標籤</string>
     <string name="menu_setting">設定</string>
 
+    <!--newTask string-->
+    <string name="newTask_title">新增任務</string>
+    <string name="newTask_project">任務類別</string>
+    <string name="newTask_tag">標籤</string>
+    <string name="newTask_noti">通知</string>
+    <string name="newTask_content">內容</string>
+    <string name="newTask_create">新增</string>
 
 </resources>

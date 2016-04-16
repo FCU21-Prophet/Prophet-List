@@ -16,7 +16,13 @@
     <string name="menu_tag">tag</string>
     <string name="menu_setting">setting</string>
 
-
+    <!--newTask string-->
+    <string name="newTask_title">New Task</string>
+    <string name="newTask_project">Project</string>
+    <string name="newTask_tag">Tag</string>
+    <string name="newTask_noti">Notification</string>
+    <string name="newTask_content">content</string>
+    <string name="newTask_create">create</string>
 
 
 </resources>
