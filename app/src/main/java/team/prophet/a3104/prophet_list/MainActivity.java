@@ -1,8 +1,10 @@
 package team.prophet.a3104.prophet_list;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -61,15 +63,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch(item.getItemId())
+        {
+            case R.id.action_about:
+                AlertDialog.Builder ad = new AlertDialog.Builder(this);
+                ad.setTitle(R.string.action_about);
+                ad.setMessage(R.string.author);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface di, int i)
+                    {
+                    }
+                };
+
+                ad.setPositiveButton("確定", listener);
+                ad.show();
+                break;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
