@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity
     {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //EXCEPTION!! when user use BACK to end activity
+        if(data == null)
+        {
+            return;
+        }
+
         if(requestCode == ACTIVITY_NEW_TASK)
         {
             tag = data.getStringExtra(newTask.TAG_RESULT);
