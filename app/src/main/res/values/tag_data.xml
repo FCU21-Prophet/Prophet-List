@@ -8,4 +8,9 @@
         <item>@string/menu_personal</item>
 
     </string-array>
+
+    <string-array name="project_label">
+        <item>@string/project_none</item>
+    </string-array>
+
 </resources>

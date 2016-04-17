@@ -29,7 +29,12 @@
     <!--tag_data string-->
     <string name="tag_none">None</string>
 
+    <!--project_data string-->
+    <string name="project_none">None</string>
+
+
     <!--requestCode error-->
     <string name="requestCode_err">Request code error</string>
+
 
 </resources>
