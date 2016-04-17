@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity
 
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
+    private String tag ;
+    private String project ;
+    private String content ;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,9 +68,9 @@ public class MainActivity extends AppCompatActivity
 
         if(requestCode == ACTIVITY_NEW_TASK)
         {
-            String tag = data.getStringExtra(newTask.TAG_RESULT);
-            String project = data.getStringExtra(newTask.PROJECT_RESULT);
-            String content = data.getStringExtra(newTask.CONTENT_RESULT);
+            tag = data.getStringExtra(newTask.TAG_RESULT);
+            project = data.getStringExtra(newTask.PROJECT_RESULT);
+            content = data.getStringExtra(newTask.CONTENT_RESULT);
 
 
         }
