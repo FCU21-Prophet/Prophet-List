@@ -34,4 +34,12 @@
 
     <!--requestCode error-->
     <string name="requestCode_err">回傳碼錯誤</string>
+
+    <!--delete item-->
+    <string name="delete">刪除</string>
+    <string name="delete_ask_message">確定要刪除資料嗎?</string>
+    <string name="sure_btn">確定</string>
+    <string name="no_btn">否</string>
+    <string name="empty_content">內容不能為空</string>
+
 </resources>

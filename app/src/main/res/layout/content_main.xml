@@ -10,12 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="team.prophet.a3104.prophet_list.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:background="#F9F7F7"
+    android:clickable="true">
+
 
     <ListView
-        android:id="@+id/lv_toDolist"
+        android:id="@+id/lv_toDoList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#DBE2EF"
+        android:textFilterEnabled="false">
     </ListView>
 
 </RelativeLayout>

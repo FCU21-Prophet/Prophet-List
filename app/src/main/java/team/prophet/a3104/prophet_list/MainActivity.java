@@ -14,7 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
+import android.R.layout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -25,6 +32,12 @@ public class MainActivity extends AppCompatActivity
     private String tag ;
     private String project ;
     private String content ;
+    private String text_project;
+    private String text_tag;
+    private ListView toDoList;
+    private ArrayList<String> arrayItem;
+    private ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +45,47 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        text_project = getText(R.string.menu_project).toString() + ":";
+        text_tag = getText(R.string.menu_tag).toString() + ":";
+
+        toDoList = (ListView)findViewById(R.id.lv_toDoList);
+        arrayItem = new ArrayList<String>();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayItem);
+        toDoList.setAdapter(adapter);
+        toDoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View view, final int position, long id)
+            {
+                AlertDialog.Builder change = new AlertDialog.Builder(MainActivity.this);
+                change.setTitle(R.string.delete);
+                change.setMessage(R.string.delete_ask_message);
+                change.setPositiveButton(R.string.sure_btn, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        arrayItem.remove(position);
+                        toDoList.setAdapter(adapter);
+                    }
+
+                });
+                change.setNegativeButton(R.string.no_btn, new DialogInterface.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                    }
+                });
+
+                change.show();
+
+                return false;
+
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
@@ -77,6 +131,17 @@ public class MainActivity extends AppCompatActivity
             tag = data.getStringExtra(newTask.TAG_RESULT);
             project = data.getStringExtra(newTask.PROJECT_RESULT);
             content = data.getStringExtra(newTask.CONTENT_RESULT);
+
+            if(!content.equals("")) {
+                arrayItem.add("\n" + text_project + project + "\n"
+                        + text_tag + tag + "\n"
+                        + "\t" + content + "\n");
+                toDoList.setAdapter(adapter);
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this,R.string.empty_content,Toast.LENGTH_SHORT).show();
+            }
 
 
         }
