@@ -59,10 +59,10 @@
         android:layout_below="@id/sp_tag"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp"
-        android:labelFor="@id/et_content"
+        android:labelFor="@+id/et_content"
         />
 
-    <EditText android:id="@+id/et_content"
+    <EditText android:id="@id/et_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
