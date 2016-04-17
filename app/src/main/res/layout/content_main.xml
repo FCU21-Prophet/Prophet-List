@@ -12,8 +12,10 @@
     tools:context="team.prophet.a3104.prophet_list.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <ListView
+        android:id="@+id/lv_toDolist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
 </RelativeLayout>
