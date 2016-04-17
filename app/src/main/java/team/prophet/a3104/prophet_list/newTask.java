@@ -51,6 +51,8 @@ public class newTask extends AppCompatActivity {
         public void onClick(View v)
         {
             rt_content = content.getText().toString();
+            rt_project = project.getSelectedItem().toString();
+            rt_tag = tag.getSelectedItem().toString();
 
             Intent intent = new Intent();
 
