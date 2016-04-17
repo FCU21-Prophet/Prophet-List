@@ -56,11 +56,11 @@ public class newTask extends AppCompatActivity {
 
             Intent intent = new Intent();
 
-            intent.putExtra(rt_tag,TAG_RESULT);
-            intent.putExtra(rt_project,PROJECT_RESULT);
-            intent.putExtra(rt_content,CONTENT_RESULT);
+            intent.putExtra(TAG_RESULT, rt_tag);
+            intent.putExtra(PROJECT_RESULT, rt_project);
+            intent.putExtra(CONTENT_RESULT, rt_content);
 
-            setResult(RESULT_OK,intent);
+            setResult(RESULT_OK, intent);
             finish();
         }
     };
