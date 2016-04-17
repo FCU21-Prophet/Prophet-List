@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        text_project = getText(R.string.menu_project).toString() + ":";
-        text_tag = getText(R.string.menu_tag).toString() + ":";
+        text_project = getText(R.string.menu_project).toString() + "：";
+        text_tag = getText(R.string.menu_tag).toString() + "：";
 
         toDoList = (ListView)findViewById(R.id.lv_toDoList);
         arrayItem = new ArrayList<String>();
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
 
             if(!content.equals("")) {
                 arrayItem.add("\n" + text_project + project + "\n"
-                        + text_tag + tag + "\n"
+                        + text_tag + tag + "\n\n"
                         + "\t" + content + "\n");
                 toDoList.setAdapter(adapter);
             }
