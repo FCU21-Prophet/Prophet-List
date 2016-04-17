@@ -26,4 +26,9 @@
     <string name="newTask_content">內容</string>
     <string name="newTask_create">新增</string>
 
+    <!--tag_data string-->
+    <string name="tag_none">無</string>
+
+    <!--requestCode error-->
+    <string name="requestCode_err">回傳碼錯誤</string>
 </resources>

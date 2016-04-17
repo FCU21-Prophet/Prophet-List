@@ -14,12 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
 
-  //  public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
+    public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity
                 //Intent for call newTask
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, newTask.class);
-               // startActivityForResult(intent,ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivityForResult(intent,ACTIVITY_NEW_TASK);
+
             }
         });
 
@@ -56,13 +57,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-   /* @Override
+    @Override
     //get return data
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-    }*/
+        if(requestCode == ACTIVITY_NEW_TASK)
+        {
+            String tag = data.getStringExtra(newTask.TAG_RESULT);
+            String project = data.getStringExtra(newTask.PROJECT_RESULT);
+            String content = data.getStringExtra(newTask.CONTENT_RESULT);
+
+
+        }
+        else//show error imformation
+        {
+            Toast.makeText(MainActivity.this,R.string.requestCode_err,Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onBackPressed() {

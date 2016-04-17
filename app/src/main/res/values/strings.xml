@@ -26,5 +26,10 @@
     <string name="newTask_content">content</string>
     <string name="newTask_create">create</string>
 
+    <!--tag_data string-->
+    <string name="tag_none">None</string>
+
+    <!--requestCode error-->
+    <string name="requestCode_err">Request code error</string>
 
 </resources>
