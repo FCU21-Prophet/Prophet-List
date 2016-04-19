@@ -18,10 +18,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.R.layout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 };
 
-                ad.setPositiveButton(R.string.about_enter, listener);
+                ad.setPositiveButton(R.string.about_ok, listener);
                 ad.show();
                 break;
         }

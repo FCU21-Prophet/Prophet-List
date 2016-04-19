@@ -6,8 +6,8 @@
 
     <!--menu string-->
     <string name="menu_about">About</string>
-    <string name="about_author">Author:Prophet</string>
-    <string name="about_enter">Enter</string>
+    <string name="about_author">Author : Prophet-Team</string>
+    <string name="about_ok">OK</string>
 
     <!--menu string-->
     <string name="menu_user">User</string>
