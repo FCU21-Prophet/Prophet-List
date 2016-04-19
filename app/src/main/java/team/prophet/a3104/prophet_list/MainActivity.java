@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-        else//show error imformation
+        else//show error information
         {
             Toast.makeText(MainActivity.this,R.string.requestCode_err,Toast.LENGTH_SHORT).show();
         }
