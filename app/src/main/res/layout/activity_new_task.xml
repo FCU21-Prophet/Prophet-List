@@ -61,12 +61,13 @@
         android:layout_marginTop="26dp"
         />
 
-    <EditText android:id="@+id/et_content"
+    <EditText
+        android:id="@+id/et_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_below="@id/tv_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         />
 
     <Button android:id="@+id/btn_create"
@@ -75,4 +76,5 @@
         android:text="@string/newTask_create"
         android:layout_alignParentBottom="true"
         />
+
 </RelativeLayout>
