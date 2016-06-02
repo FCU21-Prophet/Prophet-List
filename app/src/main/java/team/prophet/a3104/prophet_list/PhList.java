@@ -4,17 +4,19 @@ public class PhList {
     private long id;
     private String listTitle;
     private String listContent;
+    private String tag;
 
     /*----------------------constructor----------------------*/
     public PhList()
     {
     }
 
-    public PhList(long id, String listTitle, String listContent)
+    public PhList(long id, String listTitle, String listContent, String tag)
     {
         this.id = id;
         this.listTitle = listTitle;
         this.listContent = listContent;
+        this.tag = tag;
     }
 
     /*----------------------GETTER----------------------*/
@@ -34,6 +36,11 @@ public class PhList {
         return listContent;
     }
 
+    public String getTag()
+    {
+        return tag;
+    }
+
     /*----------------------SETTER----------------------*/
 
     public void setId(long id)
@@ -50,5 +57,9 @@ public class PhList {
     public void setListContent(String listContent)
     {
         this.listContent = listContent;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
