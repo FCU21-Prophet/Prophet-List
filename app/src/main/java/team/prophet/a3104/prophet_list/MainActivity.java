@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -30,9 +29,8 @@ public class MainActivity extends AppCompatActivity
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
     private String tag ;
-    private String project ;
     private String content ;
-    private String text_project;
+
     private String text_tag;
     private ListView toDoList;
     private ArrayList<String> arrayItem;
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        text_project = getText(R.string.menu_project).toString() + "：";
         text_tag = getText(R.string.menu_tag).toString() + "：";
 
         toDoList = (ListView)findViewById(R.id.lv_toDoList);
@@ -143,11 +140,10 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == ACTIVITY_NEW_TASK)
         {
             tag = data.getStringExtra(newTask.TAG_RESULT);
-            project = data.getStringExtra(newTask.PROJECT_RESULT);
             content = data.getStringExtra(newTask.CONTENT_RESULT);
 
             if(!content.equals("")) {
-                arrayItem.add("\n" + text_project + project + "\n"
+                arrayItem.add("\n"
                         + text_tag + tag + "\n\n"
                         + "\t" + content + "\n");
                 toDoList.setAdapter(adapter);
@@ -226,10 +222,6 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.menu_personal)
-        {
-
-        }
-        else if (id == R.id.menu_project)
         {
 
         }

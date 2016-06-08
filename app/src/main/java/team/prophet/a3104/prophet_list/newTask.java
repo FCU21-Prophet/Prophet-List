@@ -16,15 +16,12 @@ import android.widget.TextView;
 public class newTask extends AppCompatActivity {
 
     public static final String TAG_RESULT="TAG_RESULT";
-    public static final String PROJECT_RESULT="PROJECT_RESULT";
     public static final String CONTENT_RESULT="CONTENT_RESULT";
 
 
     private Spinner tag;
-    private Spinner project;
     private EditText content;
 
-    private String rt_project = null;
     private String rt_tag = null;
     private String rt_content = null;
 
@@ -36,13 +33,13 @@ public class newTask extends AppCompatActivity {
         Button btn_create = (Button)findViewById(R.id.btn_create);
 
         tag = (Spinner)findViewById(R.id.sp_tag);
-        project = (Spinner)findViewById(R.id.sp_project);
+
         content = (EditText) findViewById(R.id.et_content);
 
 
         btn_create.setOnClickListener(create);
         tag.setOnItemSelectedListener(tag_listener);
-        project.setOnItemSelectedListener(project_listener);
+      //  project.setOnItemSelectedListener(project_listener);
     }
 
 
@@ -52,13 +49,11 @@ public class newTask extends AppCompatActivity {
         public void onClick(View v)
         {
             rt_content = content.getText().toString();
-            rt_project = project.getSelectedItem().toString();
             rt_tag = tag.getSelectedItem().toString();
 
             Intent intent = new Intent();
 
             intent.putExtra(TAG_RESULT, rt_tag);
-            intent.putExtra(PROJECT_RESULT, rt_project);
             intent.putExtra(CONTENT_RESULT, rt_content);
 
             setResult(RESULT_OK, intent);
@@ -81,20 +76,6 @@ public class newTask extends AppCompatActivity {
         }
     };
 
-    private AdapterView.OnItemSelectedListener project_listener = new AdapterView.OnItemSelectedListener()
-    {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-        {
-            rt_project = parent.getItemAtPosition(position).toString();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent)
-        {
-            rt_project = getResources().getString(R.string.tag_none);
-        }
-    };
 
 
 }

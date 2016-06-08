@@ -17,29 +17,13 @@
         android:textSize="32sp"
         />
 
-    <TextView android:id="@+id/tv_project"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newTask_project"
-        android:textSize="20sp"
-        android:layout_below="@id/tv_title"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp"
-        />
-
-    <Spinner android:id="@+id/sp_project"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_project"
-        android:entries="@array/project_label"
-        />
 
     <TextView android:id="@+id/tv_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newTask_tag"
         android:textSize="20sp"
-        android:layout_below="@id/sp_project"
+        android:layout_below="@id/tv_title"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp"
         />
