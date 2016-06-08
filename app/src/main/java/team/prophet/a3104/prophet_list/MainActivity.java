@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     private ListView toDoList;
     private ArrayList<String> arrayItem;
     private ArrayAdapter<String> adapter;
+    private ImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,6 +113,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        userImage = (ImageView)header.findViewById(R.id.user_image);
+        userImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent userIntent = new Intent();
+                userIntent.setClass(MainActivity.this,UserData.class);
+                startActivity(userIntent);
+            }
+        });
     }
 
     @Override

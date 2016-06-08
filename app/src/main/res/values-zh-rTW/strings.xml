@@ -42,4 +42,11 @@
     <string name="no_btn">否</string>
     <string name="empty_content">內容不能為空</string>
 
+    <!--user data -->
+    <string name="user_name"> 使用者名稱: </string>
+    <string name="user_email"> 信箱: </string>
+    <string name="user_phone"> 連絡電話: </string>
+    <string name="user_level"> VIP等級: </string>
+    <string name="user_default">無</string>
+
 </resources>
