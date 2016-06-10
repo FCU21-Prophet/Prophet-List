@@ -29,13 +29,17 @@ public class MainActivity extends AppCompatActivity
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
     private String tag ;
+    private String title;
     private String content ;
 
     private String text_tag;
+    private String title_tag;
     private ListView toDoList;
     private ArrayList<String> arrayItem;
     private ArrayAdapter<String> adapter;
     private ImageView userImage;
+
+//    private PhListDAO db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+     //   db = new PhListDAO(this);
+
+        title_tag = getText(R.string.title).toString() + "：";
         text_tag = getText(R.string.menu_tag).toString() + "：";
 
         toDoList = (ListView)findViewById(R.id.lv_toDoList);
@@ -140,13 +147,23 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == ACTIVITY_NEW_TASK)
         {
             tag = data.getStringExtra(newTask.TAG_RESULT);
+            title = data.getStringExtra(newTask.TITLE_RESULT);
             content = data.getStringExtra(newTask.CONTENT_RESULT);
 
-            if(!content.equals("")) {
+            if(!content.equals(""))
+            {
+                PhList item = new PhList();
+
                 arrayItem.add("\n"
+                        + title_tag + title + "\n"
                         + text_tag + tag + "\n\n"
                         + "\t" + content + "\n");
                 toDoList.setAdapter(adapter);
+
+                /*item.setTag(tag);
+                item.setListTitle(title);
+                item.setListContent(content);
+                db.insert(item);*/
             }
             else
             {

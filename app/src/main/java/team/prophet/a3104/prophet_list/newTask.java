@@ -16,13 +16,16 @@ import android.widget.TextView;
 public class newTask extends AppCompatActivity {
 
     public static final String TAG_RESULT="TAG_RESULT";
+    public static final String TITLE_RESULT="TITLE_RESULT";
     public static final String CONTENT_RESULT="CONTENT_RESULT";
 
 
     private Spinner tag;
+    private EditText title;
     private EditText content;
 
     private String rt_tag = null;
+    private String rt_title = null;
     private String rt_content = null;
 
     @Override
@@ -33,7 +36,7 @@ public class newTask extends AppCompatActivity {
         Button btn_create = (Button)findViewById(R.id.btn_create);
 
         tag = (Spinner)findViewById(R.id.sp_tag);
-
+        title = (EditText)findViewById(R.id.et_title);
         content = (EditText) findViewById(R.id.et_content);
 
 
@@ -48,12 +51,14 @@ public class newTask extends AppCompatActivity {
     {
         public void onClick(View v)
         {
+            rt_title = title.getText().toString();
             rt_content = content.getText().toString();
             rt_tag = tag.getSelectedItem().toString();
 
             Intent intent = new Intent();
 
             intent.putExtra(TAG_RESULT, rt_tag);
+            intent.putExtra(TITLE_RESULT,rt_title);
             intent.putExtra(CONTENT_RESULT, rt_content);
 
             setResult(RESULT_OK, intent);

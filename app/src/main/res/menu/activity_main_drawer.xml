@@ -13,15 +13,15 @@
         <item
             android:id="@+id/menu_personal"
             android:title="@string/menu_personal" />
-
         <item
             android:id="@+id/menu_tag"
             android:title="@string/menu_tag" />
-
+        <item
+            android:id="@+id/menu_done"
+            android:title="@string/menu_done" />
         <item
             android:id="@+id/menu_setting"
             android:title="@string/menu_setting"
-
             />
 
     </group>
