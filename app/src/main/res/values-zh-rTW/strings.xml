@@ -14,13 +14,12 @@
     <string name="menu_company">公司</string>
     <string name="menu_school">學校</string>
     <string name="menu_personal">個人</string>
-    <string name="menu_project">專案</string>
     <string name="menu_tag">標籤</string>
+    <string name="menu_done">已完成</string>
     <string name="menu_setting">設定</string>
 
     <!--newTask string-->
     <string name="newTask_title">新增任務</string>
-    <string name="newTask_project">任務類別</string>
     <string name="newTask_tag">標籤</string>
     <string name="newTask_noti">通知</string>
     <string name="newTask_content">內容</string>

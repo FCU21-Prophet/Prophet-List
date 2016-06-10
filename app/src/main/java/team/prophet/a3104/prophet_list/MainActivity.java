@@ -229,6 +229,10 @@ public class MainActivity extends AppCompatActivity
         {
 
         }
+        else if (id == R.id.menu_done)
+        {
+
+        }
         else if(id == R.id.menu_setting)
         {
 
