@@ -1,17 +1,20 @@
 package team.prophet.a3104.prophet_list;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 public class newTask extends AppCompatActivity {
 
@@ -34,6 +37,8 @@ public class newTask extends AppCompatActivity {
         setContentView(R.layout.activity_new_task);
 
         Button btn_create = (Button)findViewById(R.id.btn_create);
+        Button btn_setdate = (Button) findViewById(R.id.btn_setdate);
+        Button btn_settime = (Button) findViewById(R.id.btn_settime);
 
         tag = (Spinner)findViewById(R.id.sp_tag);
         title = (EditText)findViewById(R.id.et_title);
@@ -43,6 +48,8 @@ public class newTask extends AppCompatActivity {
         btn_create.setOnClickListener(create);
         tag.setOnItemSelectedListener(tag_listener);
       //  project.setOnItemSelectedListener(project_listener);
+        btn_setdate.setOnClickListener(setdate);
+        btn_settime.setOnClickListener(settime);
     }
 
 
@@ -81,6 +88,35 @@ public class newTask extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener setdate = new View.OnClickListener()
+    {
+        public void onClick(View v)
+        {
+            Calendar c = Calendar.getInstance();
+            new DatePickerDialog(newTask.this, new DatePickerDialog.OnDateSetListener()
+            {
+                public void onDateSet(DatePicker view, int year, int month, int day)
+                {
+                    TextView show = (TextView) findViewById(R.id.tv_date);
+                    show.setText(year + "年" + month + "月" + day + "日");
+                }
+            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+        }
+    };
 
-
+    private View.OnClickListener settime = new View.OnClickListener()
+    {
+        public void onClick(View v)
+        {
+            Calendar c = Calendar.getInstance();
+            new TimePickerDialog(newTask.this, new TimePickerDialog.OnTimeSetListener()
+            {
+                public void onTimeSet(TimePicker view, int hour, int minute)
+                {
+                    TextView show = (TextView) findViewById(R.id.tv_time);
+                    show.setText(hour + "時" + minute + "分");
+                }
+            }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show();
+        }
+    };
 }
