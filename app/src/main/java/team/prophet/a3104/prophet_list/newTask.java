@@ -98,7 +98,7 @@ public class newTask extends AppCompatActivity {
                 public void onDateSet(DatePicker view, int year, int month, int day)
                 {
                     TextView show = (TextView) findViewById(R.id.tv_date);
-                    show.setText(year + "年" + month + "月" + day + "日");
+                    show.setText(year + "-" + month + "-" + day);
                 }
             }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
         }
@@ -114,7 +114,7 @@ public class newTask extends AppCompatActivity {
                 public void onTimeSet(TimePicker view, int hour, int minute)
                 {
                     TextView show = (TextView) findViewById(R.id.tv_time);
-                    show.setText(hour + "時" + minute + "分");
+                    show.setText(hour + ":" + minute);
                 }
             }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show();
         }

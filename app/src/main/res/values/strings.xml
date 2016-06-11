@@ -27,6 +27,7 @@
     <string name="newTask_create">create</string>
     <string name="newTask_setdate">Set Date</string>
     <string name="newTask_settime">Set Time</string>
+    <string name="newTask_notification">Notification</string>
 
     <!--tag_data string-->
     <string name="tag_none">None</string>

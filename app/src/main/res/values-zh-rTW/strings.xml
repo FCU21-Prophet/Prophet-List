@@ -27,6 +27,7 @@
     <string name="newTask_create">新增</string>
     <string name="newTask_setdate">設定日期</string>
     <string name="newTask_settime">設定時間</string>
+    <string name="newTask_notification">通知</string>
 
     <!--tag_data string-->
     <string name="tag_none">無</string>
