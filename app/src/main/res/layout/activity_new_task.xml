@@ -61,4 +61,23 @@
         android:layout_alignParentBottom="true"
         />
 
+    <Button
+        android:id="@+id/btn_setdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newTask_setdate"
+        android:layout_marginStart="26dp"
+        android:layout_alignTop="@+id/btn_settime"
+        android:layout_toEndOf="@+id/tv_content" />
+
+    <Button
+        android:id="@+id/btn_settime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newTask_settime"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/et_content"
+        android:layout_toEndOf="@+id/et_title"
+        android:layout_marginStart="37dp" />
+
 </RelativeLayout>
