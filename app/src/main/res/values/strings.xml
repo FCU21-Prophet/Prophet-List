@@ -50,4 +50,6 @@
     <string name="user_level"> VIP level: </string>
     <string name="user_default"> none </string>
 
+    <string name="title_activity_drawer_setting">drawer_setting</string>
+
 </resources>

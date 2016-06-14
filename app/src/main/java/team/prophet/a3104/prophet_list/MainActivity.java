@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
+    public static final String TAG_REQUEST = "TAG_REQUEST";
     private String tag ;
     private String title;
     private String content ;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<String> arrayItem;
     private ArrayAdapter<String> adapter;
     private ImageView userImage;
+    private ActionBarDrawerToggle toggle;
 
 //    private PhListDAO db = null;
 
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -224,39 +226,56 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.menu_user)
-        {
-            // Handle the camera action
-        }
-        else if (id == R.id.menu_company)
-        {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,DrawerTag.class);
 
-        }
-        else if (id == R.id.menu_school)
+        if(toggle.onOptionsItemSelected(item))
         {
-
+            return true;
         }
-        else if (id == R.id.menu_personal)
+
+        switch (item.getItemId())
         {
+            case R.id.menu_company:
+                intent.putExtra(TAG_REQUEST,R.string.menu_company);
+                startActivity(intent);
+                break;
 
-        }
-        else if (id == R.id.menu_tag)
-        {
+            case R.id.menu_school:
+                intent.putExtra(TAG_REQUEST,R.string.menu_school);
+                startActivity(intent);
+                break;
 
-        }
-        else if (id == R.id.menu_done)
-        {
+            case R.id.menu_personal:
+                intent.putExtra(TAG_REQUEST,R.string.menu_personal);
+                startActivity(intent);
+                break;
 
-        }
-        else if(id == R.id.menu_setting)
-        {
+            case R.id.menu_tag:
+                intent.putExtra(TAG_REQUEST,R.string.menu_tag);
+                startActivity(intent);
+                break;
 
+            case R.id.menu_done:
+                intent.putExtra(TAG_REQUEST,R.string.menu_done);
+                startActivity(intent);
+                break;
+
+            case R.id.menu_setting:
+            /*    intent.putExtra()
+                startActivity(intent);*/
+                break;
+
+            default:
+
+                break;
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

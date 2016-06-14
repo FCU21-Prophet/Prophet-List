@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".UserData">
         </activity>
-        <activity android:name=".personal_data">
+        <activity android:name=".DrawerTag">
         </activity>
     </application>
 
