@@ -28,9 +28,11 @@ public class MainActivity extends AppCompatActivity
 
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
-    private String tag ;
+    private String tag;
     private String title;
-    private String content ;
+    private String content;
+    private String date;
+    private String time;
 
     private String text_tag;
     private String title_tag;
@@ -149,6 +151,8 @@ public class MainActivity extends AppCompatActivity
             tag = data.getStringExtra(newTask.TAG_RESULT);
             title = data.getStringExtra(newTask.TITLE_RESULT);
             content = data.getStringExtra(newTask.CONTENT_RESULT);
+            date = data.getStringExtra(newTask.DATE_RESULT);
+            time = data.getStringExtra(newTask.TIME_RESULT);
 
             if(!content.equals(""))
             {
@@ -157,7 +161,9 @@ public class MainActivity extends AppCompatActivity
                 arrayItem.add("\n"
                         + title_tag + title + "\n"
                         + text_tag + tag + "\n\n"
-                        + "\t" + content + "\n");
+                        + "\t" + content + "\n\n"
+                        + date + "  " + time
+                );
                 toDoList.setAdapter(adapter);
 
                 /*item.setTag(tag);
