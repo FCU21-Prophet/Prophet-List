@@ -12,8 +12,9 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="1,2">
+        android:layout_height="wrap_content"
+        android:stretchColumns="1,2"
+        android:id="@+id/tableLayout">
 
         <TableRow>
 
@@ -29,11 +30,10 @@
                 android:layout_gravity="center"
                 android:text="@string/user_name"
                 />
-            <TextView
+            <EditText
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="@string/user_default"
                 />
         </TableRow>
@@ -48,14 +48,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="@string/user_email"
                 />
-            <TextView
+            <EditText
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="@string/user_default"
                 />
         </TableRow>
@@ -73,11 +71,10 @@
                 android:layout_gravity="center"
                 android:text="@string/user_phone"
                 />
-            <TextView
+            <EditText
                 android:id="@+id/user_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="@string/user_default"
                 />
         </TableRow>
@@ -105,8 +102,11 @@
         </TableRow>
     </TableLayout>
 
-
-
-
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_ok"
+        android:text="@string/about_ok"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>
