@@ -21,7 +21,8 @@ public class newTask extends AppCompatActivity {
     public static final String TAG_RESULT="TAG_RESULT";
     public static final String TITLE_RESULT="TITLE_RESULT";
     public static final String CONTENT_RESULT="CONTENT_RESULT";
-
+    public static final String DATE_RESULT="DATE_RESULT";
+    public static final String TIME_RESULT="TIME_RESULT";
 
     private Spinner tag;
     private EditText title;
@@ -30,6 +31,10 @@ public class newTask extends AppCompatActivity {
     private String rt_tag = null;
     private String rt_title = null;
     private String rt_content = null;
+    private String rt_date = null;
+    private String rt_time = null;
+
+    Intent intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class newTask extends AppCompatActivity {
             rt_content = content.getText().toString();
             rt_tag = tag.getSelectedItem().toString();
 
-            Intent intent = new Intent();
+            //Intent intent = new Intent();
 
             intent.putExtra(TAG_RESULT, rt_tag);
             intent.putExtra(TITLE_RESULT,rt_title);
@@ -99,6 +104,8 @@ public class newTask extends AppCompatActivity {
                 {
                     TextView show = (TextView) findViewById(R.id.tv_date);
                     show.setText(year + "-" + month + "-" + day);
+                    rt_date = year + "-" + month + "-" + day;
+                    intent.putExtra(DATE_RESULT, rt_date);
                 }
             }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
         }
@@ -115,6 +122,8 @@ public class newTask extends AppCompatActivity {
                 {
                     TextView show = (TextView) findViewById(R.id.tv_time);
                     show.setText(hour + ":" + minute);
+                    rt_time = hour + ":" + minute;
+                    intent.putExtra(TIME_RESULT, rt_time);
                 }
             }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show();
         }
