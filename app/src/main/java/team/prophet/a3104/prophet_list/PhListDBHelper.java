@@ -14,6 +14,7 @@ public class PhListDBHelper extends SQLiteOpenHelper
     //資料庫物件?
     private static SQLiteDatabase database;
 
+
     //建構子
     public PhListDBHelper(Context context, String name,
                         SQLiteDatabase.CursorFactory factory, int version)

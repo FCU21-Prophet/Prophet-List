@@ -16,15 +16,19 @@ public class PhListDAO
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
     public static final String TAG ="tag";
+    public static final String DATE = "date";
+    public static final String TIME = "time";
 
-    public static final String[] COLUMNS = { KEY_ID, TAG, TITLE, CONTENT };
-    public static final String[] SHOW_COLUMNS = { TITLE, TAG, CONTENT, KEY_ID };
+    public static final String[] COLUMNS = { KEY_ID, TAG, TITLE, CONTENT, DATE, TIME};
+    public static final String[] SHOW_COLUMNS = { TITLE, TAG, CONTENT, DATE, TIME, KEY_ID};
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
             "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             TAG + "TEXT NOT NULL, " +
             TITLE + " TEXT NOT NULL, " +
-            CONTENT + " TEXT NOT NULL )";
+            CONTENT + " TEXT NOT NULL, " +
+            DATE + "TEXT NOT NULL, " +
+            TIME + "TEXT NOT NULL )";
 
 
     private SQLiteDatabase db;
@@ -46,6 +50,8 @@ public class PhListDAO
         cv.put(TITLE, phList.getListTitle());
         cv.put(CONTENT, phList.getListContent());
         cv.put(TAG, phList.getTag());
+        cv.put(DATE, phList.getDate());
+        cv.put(TIME, phList.getTime());
 
         long id = db.insert(TABLE_NAME,  null, cv);
         phList.setId(id);//存入_id的值
@@ -60,8 +66,11 @@ public class PhListDAO
         cv.put(TITLE, phList.getListTitle());
         cv.put(CONTENT, phList.getListContent());
         cv.put(TAG, phList.getTag());
+        cv.put(DATE, phList.getDate());
+        cv.put(TIME, phList.getTime());
 
         String where = KEY_ID + "=" + phList.getId();
+
         return db.update(TABLE_NAME, cv, where, null) > 0;
     }
 
@@ -73,7 +82,7 @@ public class PhListDAO
 
     public Cursor getAllCursor()
     {//取得所有資料
-        return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, null);
+        return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, DATE + " ASC");
     }
 
     public PhList get(long id)
@@ -99,12 +108,14 @@ public class PhListDAO
         result.setTag(cursor.getString(1));
         result.setListTitle(cursor.getString(2));
         result.setListContent(cursor.getString(3));
+        result.setDate(cursor.getString(4));
+        result.setTime(cursor.getString(5));
 
         return result;
     }
 
     public PhList searchTag(String tag)
-    {//待改
+    {//待改, 指定tag搜尋
         PhList phList = null;
         return phList;
     }
