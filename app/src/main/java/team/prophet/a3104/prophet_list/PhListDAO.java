@@ -118,10 +118,14 @@ public class PhListDAO
         return result;
     }
 
-    public PhList searchTag(String tag)
+    public Cursor searchTag(String tag)
     {//待改, 指定tag搜尋
-        PhList phList = null;
-        return phList;
+        //PhList phList = null;
+        String where =
+                "SELECT * FROM "+TABLE_NAME+" WHERE "+ TAG +" LIKE \'%" +tag+"%\'";//搜尋條件
+        Cursor result = db.rawQuery(where,null);
+
+        return result;
     }
 
 }

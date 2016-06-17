@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
     public static final String TAG_REQUEST = "TAG_REQUEST";
+
     private String tag;
     private String title;
     private String content;
@@ -267,10 +268,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
 
-            case R.id.menu_tag:
-                intent.putExtra(TAG_REQUEST,R.string.menu_tag);
-                startActivity(intent);
-                break;
 
             case R.id.menu_done:
                 intent.putExtra(TAG_REQUEST,R.string.menu_done);
