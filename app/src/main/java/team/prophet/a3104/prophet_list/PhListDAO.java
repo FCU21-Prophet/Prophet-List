@@ -16,7 +16,7 @@ public class PhListDAO
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
     public static final String TAG ="tag";
-    public static final String DATE = "date";
+    public static final String DATE = "phDate";
     public static final String TIME = "time";
 
     public static final String[] COLUMNS = { KEY_ID, TAG, TITLE, CONTENT, DATE, TIME};
@@ -24,11 +24,11 @@ public class PhListDAO
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
             "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            TAG + "TEXT NOT NULL, " +
+            TAG + " TEXT NOT NULL, " +
             TITLE + " TEXT NOT NULL, " +
             CONTENT + " TEXT NOT NULL, " +
-            DATE + "TEXT NOT NULL, " +
-            TIME + "TEXT NOT NULL )";
+            DATE + " TEXT NOT NULL, " +
+            TIME + " TEXT NOT NULL )";
 
 
     private SQLiteDatabase db;
@@ -47,13 +47,14 @@ public class PhListDAO
     {//新增一筆資料
         ContentValues cv = new ContentValues();
 
-        cv.put(TITLE, phList.getListTitle());
-        cv.put(CONTENT, phList.getListContent());
-        cv.put(TAG, phList.getTag());
-        cv.put(DATE, phList.getDate());
-        cv.put(TIME, phList.getTime());
+        cv.put(TITLE, phList.getListTitle().toString());
+        cv.put(CONTENT, phList.getListContent().toString());
+        cv.put(TAG, phList.getTag().toString());
+        cv.put(DATE, phList.getDate().toString());
+        cv.put(TIME, phList.getTime().toString());
 
-        long id = db.insert(TABLE_NAME,  null, cv);
+        long id = db.insert(TABLE_NAME, null, cv);
+
         phList.setId(id);//存入_id的值
 
         return phList;
@@ -82,7 +83,10 @@ public class PhListDAO
 
     public Cursor getAllCursor()
     {//取得所有資料
-        return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, DATE + " ASC");
+       // return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, DATE + " ASC");
+
+        String select = "SELECT * FROM " + TABLE_NAME;
+        return db.rawQuery(select,null);
     }
 
     public PhList get(long id)
