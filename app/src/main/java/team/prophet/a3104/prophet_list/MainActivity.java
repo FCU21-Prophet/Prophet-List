@@ -156,8 +156,23 @@ public class MainActivity extends AppCompatActivity
             tag = data.getStringExtra(newTask.TAG_RESULT);
             title = data.getStringExtra(newTask.TITLE_RESULT);
             content = data.getStringExtra(newTask.CONTENT_RESULT);
-            date = data.getStringExtra(newTask.DATE_RESULT);
-            time = data.getStringExtra(newTask.TIME_RESULT);
+            if(data.getStringExtra(newTask.DATE_RESULT) != null)
+            {
+                date = data.getStringExtra(newTask.DATE_RESULT);
+            }
+            else
+            {
+                date = "";
+            }
+            if(data.getStringExtra(newTask.TIME_RESULT) != null)
+            {
+                time = data.getStringExtra(newTask.TIME_RESULT);
+            }
+            else
+            {
+                time = "";
+            }
+
 
             if(!content.equals(""))
             {

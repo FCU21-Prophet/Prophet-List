@@ -72,6 +72,8 @@ public class newTask extends AppCompatActivity {
             intent.putExtra(TAG_RESULT, rt_tag);
             intent.putExtra(TITLE_RESULT,rt_title);
             intent.putExtra(CONTENT_RESULT, rt_content);
+            intent.putExtra(DATE_RESULT, rt_date);
+            intent.putExtra(TIME_RESULT, rt_time);
 
             setResult(RESULT_OK, intent);
             finish();
@@ -100,12 +102,11 @@ public class newTask extends AppCompatActivity {
             Calendar c = Calendar.getInstance();
             new DatePickerDialog(newTask.this, new DatePickerDialog.OnDateSetListener()
             {
-                public void onDateSet(DatePicker view, int year, int month, int day)
-                {
+                public void onDateSet(DatePicker view, int year, int month, int day) {
                     TextView show = (TextView) findViewById(R.id.tv_date);
                     show.setText(year + "-" + month + "-" + day);
                     rt_date = year + "-" + month + "-" + day;
-                    intent.putExtra(DATE_RESULT, rt_date);
+
                 }
             }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
         }
@@ -123,7 +124,6 @@ public class newTask extends AppCompatActivity {
                     TextView show = (TextView) findViewById(R.id.tv_time);
                     show.setText(hour + ":" + minute);
                     rt_time = hour + ":" + minute;
-                    intent.putExtra(TIME_RESULT, rt_time);
                 }
             }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show();
         }
