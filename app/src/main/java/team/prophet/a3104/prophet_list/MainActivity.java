@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity
     private String text_tag;
     private String title_tag;
     private ListView toDoList;
-    private ArrayList<String> arrayItem;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<PhList> arrayItem=new ArrayList<PhList>();
+    private PhListAdapter adapter;
     private ImageView userImage;
     private ActionBarDrawerToggle toggle;
 
@@ -57,13 +57,14 @@ public class MainActivity extends AppCompatActivity
 
         db = new PhListDAO(this);
 
-        title_tag = getText(R.string.title).toString() + "：";
+    /*    title_tag = getText(R.string.title).toString() + "：";
         text_tag = getText(R.string.menu_tag).toString() + "：";
+*/
 
         toDoList = (ListView)findViewById(R.id.lv_toDoList);
-        arrayItem =new ArrayList<String>();
-        returnData(db.getAllCursor());
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayItem);
+
+        arrayItem=returnData(db.getAllCursor());
+        adapter = new PhListAdapter(this,arrayItem);
         toDoList.setAdapter(adapter);
         toDoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        db.delete(arrayItem.get(position).getId());
                         arrayItem.remove(position);
                         toDoList.setAdapter(adapter);
                     }
@@ -182,18 +184,14 @@ public class MainActivity extends AppCompatActivity
                 item.setListContent(content);
                 item.setDate(date);
                 item.setTime(time);
-                db.insert(item);
+
+                item = db.insert(item);
 
                 if(item.getId()==-1)
                 {
                     Toast.makeText(MainActivity.this,"error",Toast.LENGTH_SHORT).show();
                 }
-                arrayItem.add("\n"
-                        + title_tag + title + "\n"
-                        + text_tag + tag + "\n\n"
-                        + "\t" + content + "\n\n"
-                        + date + "  " + time
-                );
+                arrayItem.add(item);
                 toDoList.setAdapter(adapter);
 
 
@@ -305,14 +303,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void returnData(Cursor cursor)
+    private ArrayList<PhList> returnData(Cursor cursor)
     {
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<PhList> arrayList = new ArrayList<PhList>();
         //TITLE, TAG, CONTENT, DATE, TIME, KEY_ID
         PhList result = new PhList();
 
-        if(cursor.moveToFirst())
-        {
+
             while (cursor.moveToNext())
             {
             /*result.setListTitle(cursor.getString(0));
@@ -328,15 +325,12 @@ public class MainActivity extends AppCompatActivity
                 result.setDate(cursor.getString(4));
                 result.setTime(cursor.getString(5));
 
-                arrayItem.add("\n"
-                        + title_tag + result.getListTitle() + "\n"
-                        + text_tag + result.getTag() + "\n\n"
-                        + "\t" + result.getListContent() + "\n\n"
-                        + result.getDate() + "  " + result.getTime());
+                arrayList.add(result);
             }
-        }
+
 
         cursor.close();
+        return arrayList;
     }
 
 }

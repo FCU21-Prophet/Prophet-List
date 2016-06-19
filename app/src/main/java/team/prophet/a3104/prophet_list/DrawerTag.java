@@ -17,8 +17,8 @@ public class DrawerTag extends AppCompatActivity
 {
 
     private ListView tagList;
-    private ArrayList<String> arrayItem;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<PhList> arrayItem;
+    private PhListAdapter adapter;
     private String title_tag;
     private PhListDAO db ;
     @Override
@@ -34,10 +34,10 @@ public class DrawerTag extends AppCompatActivity
         setTitle(tag);
         tagList = (ListView)findViewById(R.id.lv_tagList);
 
-        arrayItem = new ArrayList<String>();
+        arrayItem = new ArrayList<PhList>();
         returnData(db.searchTag(tag));
 
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayItem);
+        adapter = new PhListAdapter(this, arrayItem);
         tagList.setAdapter(adapter);
 
         tagList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
@@ -52,10 +52,8 @@ public class DrawerTag extends AppCompatActivity
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        db.delete(arrayItem.get(position).getId());
                         arrayItem.remove(position);
-                        /*
-                        * sql delete
-                        * */
                         tagList.setAdapter(adapter);
                     }
 
@@ -82,8 +80,6 @@ public class DrawerTag extends AppCompatActivity
     {
         PhList result = new PhList();
 
-     /*   if(cursor.moveToFirst())
-        {*/
             while (cursor.moveToNext())
             {
                 result.setId(cursor.getLong(0));
@@ -93,12 +89,9 @@ public class DrawerTag extends AppCompatActivity
                 result.setDate(cursor.getString(4));
                 result.setTime(cursor.getString(5));
 
-                arrayItem.add("\n"
-                        + title_tag + result.getListTitle() + "\n"
-                        + "\t" + result.getListContent() + "\n\n"
-                        + result.getDate() + "  " + result.getTime());
+                arrayItem.add(result);
             }
-      //  }
+
 
         cursor.close();
     }

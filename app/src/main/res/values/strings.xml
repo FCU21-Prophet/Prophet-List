@@ -5,6 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="tag">Tag</string>
+    <string name="time">Notification Time </string>
     <!--menu string-->
     <string name="menu_about">About</string>
     <string name="about_author">Author : Prophet-Team</string>
