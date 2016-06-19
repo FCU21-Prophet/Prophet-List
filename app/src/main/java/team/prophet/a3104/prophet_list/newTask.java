@@ -32,6 +32,7 @@ public class newTask extends AppCompatActivity {
     public static final String DAY_RESULT="DAY_RESULT";
     public static final String HOUR_RESULT="HOUR_RESULT";
     public static final String MINUTE_RESULT="MINUTE_RESULT";
+    public static final String UPDATE_ID = "ID";
 
     private Spinner tag;
     private EditText title;
@@ -51,6 +52,10 @@ public class newTask extends AppCompatActivity {
 
     AlarmManager am;
     PendingIntent pi;
+
+    private long id;
+    private PhListDAO phListDAO;
+    private PhList phList;
 
 
     Intent intent = new Intent();
@@ -76,6 +81,19 @@ public class newTask extends AppCompatActivity {
         Intent alarm_intent = new Intent();
         alarm_intent.setClass(newTask.this, AlarmReceiver.class);
 
+        phListDAO = new PhListDAO(this);
+        Intent intentEdit = getIntent();
+        id = intentEdit.getLongExtra(UPDATE_ID, -1);
+
+        if(id != -1)
+        {
+            phList = phListDAO.get(id);
+            title.setText(phList.getListTitle());
+            content.setText(phList.getListContent());
+        }
+
+
+
         pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, 0);
         am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     }
@@ -97,6 +115,7 @@ public class newTask extends AppCompatActivity {
             intent.putExtra(CONTENT_RESULT, rt_content);
             intent.putExtra(DATE_RESULT, rt_date);
             intent.putExtra(TIME_RESULT, rt_time);
+            intent.putExtra(UPDATE_ID, id);
 
             if(rt_date != null && rt_time != null)
             {

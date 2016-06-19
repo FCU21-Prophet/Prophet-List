@@ -42,7 +42,8 @@
     <!--delete item-->
     <string name="delete">Delete</string>
     <string name="delete_ask_message">Are you sure?</string>
-    <string name="sure_btn">Sure</string>
+    <string name="sure_btn">Delete</string>
+    <string name="edit_btn">Edit</string>
     <string name="no_btn">No</string>
     <string name="empty_content">input can\'t be empty.</string>
 

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
 {
 
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
+    public static final int ACTIVITY_UPDATE = 2;
 
     public static final String TAG_REQUEST = "TAG_REQUEST";
     public static final int[] IDS = {R.id.show_title, R.id.show_tag, R.id.show_date, R.id.show_time, R.id.show_content};
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     private String content;
     private String date;
     private String time;
+    private Long id;
 
     private ListView toDoList;
     private ImageView userImage;
@@ -80,11 +82,15 @@ public class MainActivity extends AppCompatActivity
                     }
 
                 });
-                change.setNegativeButton(R.string.no_btn, new DialogInterface.OnClickListener()
+                change.setNegativeButton(R.string.edit_btn, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
+                        Intent intent = new Intent();
+                        intent.putExtra("ID", phList.getId());
+                        intent.setClass(MainActivity.this, newTask.class);
+                        startActivityForResult(intent, ACTIVITY_UPDATE);
                     }
                 });
 
@@ -195,6 +201,54 @@ public class MainActivity extends AppCompatActivity
             }
 
 
+        }
+        else if(requestCode == ACTIVITY_UPDATE)
+        {
+            tag = data.getStringExtra(newTask.TAG_RESULT);
+            title = data.getStringExtra(newTask.TITLE_RESULT);
+            content = data.getStringExtra(newTask.CONTENT_RESULT);
+            id = data.getLongExtra(newTask.UPDATE_ID, -1);
+
+            if(data.getStringExtra(newTask.DATE_RESULT) != null)
+            {
+                date = data.getStringExtra(newTask.DATE_RESULT);
+            }
+            else
+            {
+                date = "";
+            }
+            if(data.getStringExtra(newTask.TIME_RESULT) != null)
+            {
+                time = data.getStringExtra(newTask.TIME_RESULT);
+            }
+            else
+            {
+                time = "";
+            }
+
+
+            if(!(content.equals("")) && id != -1)
+            {
+                PhList item = new PhList();
+                item.setTag(tag);
+                item.setListTitle(title);
+                item.setListContent(content);
+                item.setDate(date);
+                item.setTime(time);
+                item.setId(id);
+
+                if(!db.update(item))
+                {
+                    Toast.makeText(MainActivity.this,"error",Toast.LENGTH_SHORT).show();
+                }
+                refresh();
+
+
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this,R.string.empty_content,Toast.LENGTH_SHORT).show();
+            }
         }
         else//show error information
         {

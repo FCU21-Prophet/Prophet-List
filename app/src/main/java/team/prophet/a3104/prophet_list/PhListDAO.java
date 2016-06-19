@@ -89,6 +89,13 @@ public class PhListDAO
         //return db.rawQuery(select, null);
     }
 
+    public Cursor getTagCursor(String tag)
+    {
+        String where = TAG + "=" + "";
+        return db.query(TABLE_NAME, SHOW_COLUMNS, where, null, null, null, DATE + " ASC");
+    }
+
+
     public PhList get(long id)
     {//取得某一筆資料(指定id), 回傳PhList物件
         PhList phList = null;
