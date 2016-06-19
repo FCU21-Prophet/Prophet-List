@@ -20,7 +20,7 @@ public class PhListDAO
     public static final String TIME = "time";
 
     public static final String[] COLUMNS = { KEY_ID, TAG, TITLE, CONTENT, DATE, TIME};
-    public static final String[] SHOW_COLUMNS = { TITLE, TAG, CONTENT, DATE, TIME, KEY_ID};
+    public static final String[] SHOW_COLUMNS = { TITLE, TAG, DATE, TIME, CONTENT, KEY_ID};
 
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
             "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -83,10 +83,10 @@ public class PhListDAO
 
     public Cursor getAllCursor()
     {//取得所有資料
-       // return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, DATE + " ASC");
+        return db.query(TABLE_NAME, SHOW_COLUMNS, null, null, null, null, DATE + " ASC");
 
-        String select = "SELECT * FROM " + TABLE_NAME;
-        return db.rawQuery(select,null);
+        //String select = "SELECT * FROM " + TABLE_NAME;
+        //return db.rawQuery(select, null);
     }
 
     public PhList get(long id)

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     public static final int ACTIVITY_NEW_TASK = 1;//request code from MainActivity to activity_new_task
 
     public static final String TAG_REQUEST = "TAG_REQUEST";
+    public static final int[] IDS = {R.id.show_title, R.id.show_tag, R.id.show_date, R.id.show_time, R.id.show_content};
 
     private String tag;
     private String title;
@@ -37,13 +40,10 @@ public class MainActivity extends AppCompatActivity
     private String date;
     private String time;
 
-    private String text_tag;
-    private String title_tag;
     private ListView toDoList;
-    private ArrayList<PhList> arrayItem=new ArrayList<PhList>();
-    private PhListAdapter adapter;
     private ImageView userImage;
     private ActionBarDrawerToggle toggle;
+    private PhList phList;
 
     private PhListDAO db = null;
 
@@ -57,36 +57,31 @@ public class MainActivity extends AppCompatActivity
 
         db = new PhListDAO(this);
 
-    /*    title_tag = getText(R.string.title).toString() + "：";
-        text_tag = getText(R.string.menu_tag).toString() + "：";
-*/
-
         toDoList = (ListView)findViewById(R.id.lv_toDoList);
 
-        arrayItem=returnData(db.getAllCursor());
-        adapter = new PhListAdapter(this,arrayItem);
-        toDoList.setAdapter(adapter);
+        refresh();
+
         toDoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View view, final int position, long id)
             {
+                phList = db.get(id);
                 AlertDialog.Builder change = new AlertDialog.Builder(MainActivity.this);
                 change.setTitle(R.string.delete);
                 change.setMessage(R.string.delete_ask_message);
                 change.setPositiveButton(R.string.sure_btn, new DialogInterface.OnClickListener()
                 {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        db.delete(arrayItem.get(position).getId());
-                        arrayItem.remove(position);
-                        toDoList.setAdapter(adapter);
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        db.delete(phList.getId());
+                        refresh();
                     }
 
                 });
                 change.setNegativeButton(R.string.no_btn, new DialogInterface.OnClickListener()
                 {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
@@ -94,7 +89,6 @@ public class MainActivity extends AppCompatActivity
                 });
 
                 change.show();
-
                 return false;
 
             }
@@ -113,7 +107,7 @@ public class MainActivity extends AppCompatActivity
                 //Intent for call newTask
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, newTask.class);
-                startActivityForResult(intent,ACTIVITY_NEW_TASK);
+                startActivityForResult(intent, ACTIVITY_NEW_TASK);
 
             }
         });
@@ -187,12 +181,11 @@ public class MainActivity extends AppCompatActivity
 
                 item = db.insert(item);
 
-                if(item.getId()==-1)
+                if(item.getId() == -1)
                 {
                     Toast.makeText(MainActivity.this,"error",Toast.LENGTH_SHORT).show();
                 }
-                arrayItem.add(item);
-                toDoList.setAdapter(adapter);
+                refresh();
 
 
             }
@@ -303,34 +296,48 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private ArrayList<PhList> returnData(Cursor cursor)
+  /*  private ArrayList<PhList> returnData(Cursor cursor)
     {
         ArrayList<PhList> arrayList = new ArrayList<PhList>();
         //TITLE, TAG, CONTENT, DATE, TIME, KEY_ID
         PhList result = new PhList();
+        cursor.moveToFirst();
 
+        while (!cursor.isAfterLast())
+        {
+        /*result.setListTitle(cursor.getString(0));
+        result.setTag(cursor.getString(1));
+        result.setListContent(cursor.getString(2));
+        result.setDate(cursor.getString(3));
+        result.setTime(cursor.getString(4));
+        result.setId(cursor.getLong(5));
 
-            while (cursor.moveToNext())
-            {
-            /*result.setListTitle(cursor.getString(0));
+            result.setId(cursor.getLong(0));
             result.setTag(cursor.getString(1));
-            result.setListContent(cursor.getString(2));
-            result.setDate(cursor.getString(3));
-            result.setTime(cursor.getString(4));
-            result.setId(cursor.getLong(5));*/
-                result.setId(cursor.getLong(0));
-                result.setTag(cursor.getString(1));
-                result.setListTitle(cursor.getString(2));
-                result.setListContent(cursor.getString(3));
-                result.setDate(cursor.getString(4));
-                result.setTime(cursor.getString(5));
+            result.setListTitle(cursor.getString(2));
+            result.setListContent(cursor.getString(3));
+            result.setDate(cursor.getString(4));
+            result.setTime(cursor.getString(5));
 
-                arrayList.add(result);
-            }
+            arrayList.add(result);
+            cursor.moveToNext();
+        }
 
 
         cursor.close();
         return arrayList;
+    }        */
+
+    private void refresh()
+    {// refresh listview
+        Cursor cursor = db.getAllCursor();
+
+        SimpleCursorAdapter sca = new SimpleCursorAdapter(
+                this, R.layout.list_view,
+                cursor, db.SHOW_COLUMNS, IDS,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        toDoList.setAdapter(sca);
     }
+
 
 }
