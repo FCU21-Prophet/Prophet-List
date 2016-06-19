@@ -62,20 +62,13 @@
         />
 
     <Button
-        android:id="@+id/btn_setdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newTask_setdate"
-        android:layout_below="@+id/tv_notification"
-        android:layout_alignParentStart="true" />
-
-    <Button
         android:id="@+id/btn_settime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/newTask_settime"
-        android:layout_alignTop="@+id/btn_setdate"
-        android:layout_toEndOf="@+id/btn_setdate" />
+        android:layout_below="@+id/tv_notification"
+        android:layout_alignParentStart="true" />
+
 
     <TextView android:id="@+id/tv_notification"
         android:layout_width="wrap_content"
@@ -90,7 +83,7 @@
         android:layout_height="wrap_content"
 
         android:textSize="20sp"
-        android:layout_below="@+id/btn_setdate"
+        android:layout_below="@+id/btn_settime"
         android:layout_alignParentStart="true" />
 
     <TextView android:id="@+id/tv_time"

@@ -1,7 +1,10 @@
 package team.prophet.a3104.prophet_list;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -23,6 +27,11 @@ public class newTask extends AppCompatActivity {
     public static final String CONTENT_RESULT="CONTENT_RESULT";
     public static final String DATE_RESULT="DATE_RESULT";
     public static final String TIME_RESULT="TIME_RESULT";
+    public static final String YEAR_RESULT="YEAR_RESULT";
+    public static final String MONTH_RESULT="MONTH_RESULT";
+    public static final String DAY_RESULT="DAY_RESULT";
+    public static final String HOUR_RESULT="HOUR_RESULT";
+    public static final String MINUTE_RESULT="MINUTE_RESULT";
 
     private Spinner tag;
     private EditText title;
@@ -34,6 +43,16 @@ public class newTask extends AppCompatActivity {
     private String rt_date = null;
     private String rt_time = null;
 
+    private int rt_year;
+    private int rt_month;
+    private int rt_day;
+    private int rt_hour;
+    private int rt_minute;
+
+    AlarmManager am;
+    PendingIntent pi;
+
+
     Intent intent = new Intent();
 
     @Override
@@ -42,7 +61,6 @@ public class newTask extends AppCompatActivity {
         setContentView(R.layout.activity_new_task);
 
         Button btn_create = (Button)findViewById(R.id.btn_create);
-        Button btn_setdate = (Button) findViewById(R.id.btn_setdate);
         Button btn_settime = (Button) findViewById(R.id.btn_settime);
 
         tag = (Spinner)findViewById(R.id.sp_tag);
@@ -53,8 +71,13 @@ public class newTask extends AppCompatActivity {
         btn_create.setOnClickListener(create);
         tag.setOnItemSelectedListener(tag_listener);
       //  project.setOnItemSelectedListener(project_listener);
-        btn_setdate.setOnClickListener(setdate);
         btn_settime.setOnClickListener(settime);
+
+        Intent alarm_intent = new Intent();
+        alarm_intent.setClass(newTask.this, AlarmReceiver.class);
+
+        pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, 0);
+        am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     }
 
 
@@ -75,9 +98,20 @@ public class newTask extends AppCompatActivity {
             intent.putExtra(DATE_RESULT, rt_date);
             intent.putExtra(TIME_RESULT, rt_time);
 
+            if(rt_date != null && rt_time != null)
+            {
+                Calendar cal = Calendar.getInstance();
+                cal.set(rt_year, rt_month, rt_day, rt_hour, rt_minute, 0);
+
+                am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+                Toast.makeText(newTask.this, "testing", Toast.LENGTH_SHORT).show();
+            }
+
             setResult(RESULT_OK, intent);
             finish();
         }
+
+
     };
 
     private AdapterView.OnItemSelectedListener tag_listener = new AdapterView.OnItemSelectedListener()
@@ -95,23 +129,6 @@ public class newTask extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener setdate = new View.OnClickListener()
-    {
-        public void onClick(View v)
-        {
-            Calendar c = Calendar.getInstance();
-            new DatePickerDialog(newTask.this, new DatePickerDialog.OnDateSetListener()
-            {
-                public void onDateSet(DatePicker view, int year, int month, int day) {
-                    TextView show = (TextView) findViewById(R.id.tv_date);
-                    show.setText(year + "-" + month + "-" + day);
-                    rt_date = year + "-" + month + "-" + day;
-
-                }
-            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
-        }
-    };
-
     private View.OnClickListener settime = new View.OnClickListener()
     {
         public void onClick(View v)
@@ -124,8 +141,25 @@ public class newTask extends AppCompatActivity {
                     TextView show = (TextView) findViewById(R.id.tv_time);
                     show.setText(hour + ":" + minute);
                     rt_time = hour + ":" + minute;
+                    rt_hour = hour;
+                    rt_minute = minute;
                 }
             }, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true).show();
+
+            new DatePickerDialog(newTask.this, new DatePickerDialog.OnDateSetListener()
+            {
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    TextView show = (TextView) findViewById(R.id.tv_date);
+                    int show_month = month + 1;
+                    show.setText(year + "-" + show_month + "-" + day);
+                    rt_date = year + "-" + show_month + "-" + day;
+                    rt_year = year;
+                    rt_month = month;
+                    rt_day = day;
+                }
+            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
         }
     };
+
 }
