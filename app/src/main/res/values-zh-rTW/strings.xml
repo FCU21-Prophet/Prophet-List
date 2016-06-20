@@ -11,7 +11,16 @@
 
     <!--menu string-->
     <string name="menu_about">關於</string>
-    <string name="about_author">製作 : \"先知是孤獨的\" 製作委員會</string>
+    <string name="about_author">
+        製作 : \n\n
+        FCU IECS\n
+        1042行動應用程式開發-專題作業\n\n
+        第21組\n
+        D0308897 楊易哲 gazer099\n
+        D0178526 陳俊次 jimmy820904\n
+        D0341583 簡若宜 nori243\n
+        D0381955 王心慈 HsintzuWong\n
+    </string>
     <string name="about_ok">確定</string>
 
     <!--menu string-->
