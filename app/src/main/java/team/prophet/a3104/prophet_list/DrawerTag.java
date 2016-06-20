@@ -8,6 +8,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,6 +70,7 @@ public class DrawerTag extends AppCompatActivity
                         intent.putExtra("ID", phList.getId());
                         intent.setClass(DrawerTag.this, newTask.class);
                         startActivityForResult(intent, MainActivity.ACTIVITY_UPDATE);
+
                     }
                 });
 
@@ -94,6 +96,25 @@ public class DrawerTag extends AppCompatActivity
         tagList.setAdapter(sca);
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {   //確定按下退出鍵
+
+            Cursor cursor = db.getAllCursor();
+
+            SimpleCursorAdapter sca = new SimpleCursorAdapter(
+                    this, R.layout.list_view,
+                    cursor, db.SHOW_COLUMNS, MainActivity.IDS,
+                    CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            MainActivity.toDoList.setAdapter(sca);
+            finish();
+            return true;
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     private String time;
     private Long id;
 
-    private ListView toDoList;
+    public static ListView toDoList;
     private ImageView userImage;
     private ActionBarDrawerToggle toggle;
     private PhList phList;
