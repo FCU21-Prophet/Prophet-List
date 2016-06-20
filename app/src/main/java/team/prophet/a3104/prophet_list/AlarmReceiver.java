@@ -14,8 +14,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-        String title = intent.getStringExtra("TITLE_RESULT");
-        String content = intent.getStringExtra("CONTENT_RESULT");
+        String title = intent.getStringExtra(newTask.TITLE_RESULT);
+        String content = intent.getStringExtra(newTask.CONTENT_RESULT);
 
         Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
         Intent notification_intent = new Intent();

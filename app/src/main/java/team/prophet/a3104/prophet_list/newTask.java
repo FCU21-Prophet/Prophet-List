@@ -107,8 +107,7 @@ public class newTask extends AppCompatActivity {
 
 
 
-        pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, 0);
-        am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
     }
 
 
@@ -137,6 +136,8 @@ public class newTask extends AppCompatActivity {
                 alarm_intent.putExtra(TITLE_RESULT,rt_title);
                 alarm_intent.putExtra(CONTENT_RESULT, rt_content);
 
+                pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, 0);
+                am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
             }
 
