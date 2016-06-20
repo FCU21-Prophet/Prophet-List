@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -27,11 +26,6 @@ public class newTask extends AppCompatActivity {
     public static final String CONTENT_RESULT="CONTENT_RESULT";
     public static final String DATE_RESULT="DATE_RESULT";
     public static final String TIME_RESULT="TIME_RESULT";
-    public static final String YEAR_RESULT="YEAR_RESULT";
-    public static final String MONTH_RESULT="MONTH_RESULT";
-    public static final String DAY_RESULT="DAY_RESULT";
-    public static final String HOUR_RESULT="HOUR_RESULT";
-    public static final String MINUTE_RESULT="MINUTE_RESULT";
     public static final String UPDATE_ID = "ID";
 
     private Spinner tag;
@@ -59,6 +53,7 @@ public class newTask extends AppCompatActivity {
 
 
     Intent intent = new Intent();
+    Intent alarm_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +73,7 @@ public class newTask extends AppCompatActivity {
       //  project.setOnItemSelectedListener(project_listener);
         btn_settime.setOnClickListener(settime);
 
-        Intent alarm_intent = new Intent();
+        alarm_intent = new Intent();
         alarm_intent.setClass(newTask.this, AlarmReceiver.class);
 
         phListDAO = new PhListDAO(this);
@@ -121,9 +116,10 @@ public class newTask extends AppCompatActivity {
             {
                 Calendar cal = Calendar.getInstance();
                 cal.set(rt_year, rt_month, rt_day, rt_hour, rt_minute, 0);
+                alarm_intent.putExtra(TITLE_RESULT,rt_title);
+                alarm_intent.putExtra(CONTENT_RESULT, rt_content);
 
                 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
-                Toast.makeText(newTask.this, "testing", Toast.LENGTH_SHORT).show();
             }
 
             setResult(RESULT_OK, intent);

@@ -25,6 +25,11 @@
         <activity android:name=".DrawerTag">
         </activity>
         <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".Notification">
+            <intent-filter>
+                <action android:name="PROPHET" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
