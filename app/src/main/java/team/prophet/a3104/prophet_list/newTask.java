@@ -84,6 +84,24 @@ public class newTask extends AppCompatActivity {
         {
             phList = phListDAO.get(id);
             title.setText(phList.getListTitle());
+
+            if(phList.getTag().equals(getString(R.string.tag_none)))
+            {
+                tag.setSelection(0);
+            }
+            else if(phList.getTag().equals(getString(R.string.menu_company)))
+            {
+                tag.setSelection(1);
+            }
+            else if(phList.getTag().equals(getString(R.string.menu_school)))
+            {
+                tag.setSelection(2);
+            }
+            else if(phList.getTag().equals(getString(R.string.menu_personal)))
+            {
+                tag.setSelection(3);
+            }
+
             content.setText(phList.getListContent());
         }
 

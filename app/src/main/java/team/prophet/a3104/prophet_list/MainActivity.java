@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity
 
         View header = navigationView.getHeaderView(0);
         userImage = (ImageView)header.findViewById(R.id.user_image);
-        userImage.setOnClickListener(new View.OnClickListener()
+      /*  userImage.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                 userIntent.setClass(MainActivity.this,UserData.class);
                 startActivity(userIntent);
             }
-        });
+        });*/
     }
 
     @Override

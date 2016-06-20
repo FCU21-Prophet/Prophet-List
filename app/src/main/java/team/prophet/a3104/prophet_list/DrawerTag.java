@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,12 +60,15 @@ public class DrawerTag extends AppCompatActivity
                     }
 
                 });
-                change.setNegativeButton(R.string.no_btn, new DialogInterface.OnClickListener()
+                change.setNegativeButton(R.string.edit_btn, new DialogInterface.OnClickListener()
                 {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
+                        Intent intent = new Intent();
+                        intent.putExtra("ID", phList.getId());
+                        intent.setClass(DrawerTag.this, newTask.class);
+                        startActivityForResult(intent, MainActivity.ACTIVITY_UPDATE);
                     }
                 });
 
@@ -90,5 +94,63 @@ public class DrawerTag extends AppCompatActivity
         tagList.setAdapter(sca);
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MainActivity.ACTIVITY_UPDATE)
+        {
+            tag = data.getStringExtra(newTask.TAG_RESULT);
+            String title = data.getStringExtra(newTask.TITLE_RESULT);
+            String content = data.getStringExtra(newTask.CONTENT_RESULT);
+            long id = data.getLongExtra(newTask.UPDATE_ID, -1);
+            String date;
+            String time;
+
+            if(data.getStringExtra(newTask.DATE_RESULT) != null)
+            {
+                date = data.getStringExtra(newTask.DATE_RESULT);
+            }
+            else
+            {
+                date = "";
+            }
+            if(data.getStringExtra(newTask.TIME_RESULT) != null)
+            {
+                time = data.getStringExtra(newTask.TIME_RESULT);
+            }
+            else
+            {
+                time = "";
+            }
+
+
+            if(!(content.equals("")) && id != -1)
+            {
+                PhList item = new PhList();
+                item.setTag(tag);
+                item.setListTitle(title);
+                item.setListContent(content);
+                item.setDate(date);
+                item.setTime(time);
+                item.setId(id);
+
+                if(!db.update(item))
+                {
+                    Toast.makeText(DrawerTag.this,"error",Toast.LENGTH_SHORT).show();
+                }
+                refresh();
+
+
+            }
+            else
+            {
+                Toast.makeText(DrawerTag.this,R.string.empty_content,Toast.LENGTH_SHORT).show();
+            }
+        }
+        else//show error information
+        {
+            Toast.makeText(DrawerTag.this,R.string.requestCode_err,Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }
