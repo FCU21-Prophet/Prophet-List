@@ -44,6 +44,11 @@ public class Notification extends BroadcastReceiver {
 
         android.app.Notification.Builder builder =
                 new android.app.Notification.Builder(context);
+        int defaults = 0;
+        defaults |= android.app.Notification.DEFAULT_VIBRATE;
+        defaults |= android.app.Notification.DEFAULT_SOUND;
+        defaults |= android.app.Notification.DEFAULT_LIGHTS;
+        builder.setDefaults(defaults);
         builder.setContentTitle(title);
         builder.setContentText(msg);
         builder.setSmallIcon(R.mipmap.ic_launcher);
