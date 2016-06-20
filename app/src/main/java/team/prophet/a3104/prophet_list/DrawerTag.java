@@ -3,6 +3,8 @@ package team.prophet.a3104.prophet_list;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ public class DrawerTag extends AppCompatActivity
     private PhListAdapter adapter;
     private String title_tag;
     private PhListDAO db ;
+    private String tag;
+    private PhList phList;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,21 +34,19 @@ public class DrawerTag extends AppCompatActivity
         setContentView(R.layout.activity_drawer_tag);
         title_tag = getText(R.string.title).toString() + "：";
         Intent intent = getIntent();
-        String tag = getString(intent.getIntExtra(MainActivity.TAG_REQUEST,0));
+        tag = getString(intent.getIntExtra(MainActivity.TAG_REQUEST,0));
         setTitle(tag);
         tagList = (ListView)findViewById(R.id.lv_tagList);
 
-        arrayItem = new ArrayList<PhList>();
-        returnData(db.searchTag(tag));
+        refresh();
 
-        adapter = new PhListAdapter(this, arrayItem);
-        tagList.setAdapter(adapter);
 
         tagList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View view, final int position, long id)
             {
+                phList = db.get(id);
                 AlertDialog.Builder change = new AlertDialog.Builder(DrawerTag.this);
                 change.setTitle(R.string.delete);
                 change.setMessage(R.string.delete_ask_message);
@@ -52,9 +54,8 @@ public class DrawerTag extends AppCompatActivity
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        db.delete(arrayItem.get(position).getId());
-                        arrayItem.remove(position);
-                        tagList.setAdapter(adapter);
+                        db.delete(phList.getId());
+                        refresh();
                     }
 
                 });
@@ -76,24 +77,18 @@ public class DrawerTag extends AppCompatActivity
 
     }
 
-    private void returnData(Cursor cursor)
-    {
-        PhList result = new PhList();
 
-            while (cursor.moveToNext())
-            {
-                result.setId(cursor.getLong(0));
-                result.setTag(cursor.getString(1));
-                result.setListTitle(cursor.getString(2));
-                result.setListContent(cursor.getString(3));
-                result.setDate(cursor.getString(4));
-                result.setTime(cursor.getString(5));
+    private void refresh()
+    {// refresh listview
+        Cursor cursor = db.searchTag(tag);
 
-                arrayItem.add(result);
-            }
+        SimpleCursorAdapter sca = new SimpleCursorAdapter(
+                this, R.layout.list_view,
+                cursor, db.SHOW_COLUMNS, MainActivity.IDS,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
-
-        cursor.close();
+        tagList.setAdapter(sca);
     }
+
 
 }

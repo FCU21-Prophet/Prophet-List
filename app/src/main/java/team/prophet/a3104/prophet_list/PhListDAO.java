@@ -89,12 +89,6 @@ public class PhListDAO
         //return db.rawQuery(select, null);
     }
 
-    public Cursor getTagCursor(String tag)
-    {
-        String where = TAG + "=" + "";
-        return db.query(TABLE_NAME, SHOW_COLUMNS, where, null, null, null, DATE + " ASC");
-    }
-
 
     public PhList get(long id)
     {//取得某一筆資料(指定id), 回傳PhList物件
@@ -129,10 +123,14 @@ public class PhListDAO
     {//待改, 指定tag搜尋
         //PhList phList = null;
         String where =
-                "SELECT * FROM "+TABLE_NAME+" WHERE "+ TAG +" LIKE \'%" +tag+"%\'";//搜尋條件
-        Cursor result = db.rawQuery(where,null);
+               TAG +" LIKE \'%" +tag+"%\'";//搜尋條件
 
-        return result;
+        // + " ORDER BY "+ DATE + " ASC"
+        //Cursor result = db.rawQuery(where, null);
+
+
+
+        return db.query(TABLE_NAME, SHOW_COLUMNS, where, null, null, null, DATE + " ASC");
     }
 
 }
