@@ -51,7 +51,7 @@ public class Notification extends BroadcastReceiver {
         builder.setDefaults(defaults);
         builder.setContentTitle(title);
         builder.setContentText(msg);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.ic_launcher_ver2);
         builder.setContentIntent(pi);
         builder.setTicker(msg);
         builder.setWhen(System.currentTimeMillis());
