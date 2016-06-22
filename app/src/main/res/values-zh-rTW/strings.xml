@@ -46,7 +46,7 @@
     <string name="tag_none">無</string>
 
     <!--project_data string-->
-    <string name="project_none">無</string>
+
 
     <!--requestCode error-->
     <string name="requestCode_err">回傳碼錯誤</string>
