@@ -1,5 +1,5 @@
 # Prophet-List
-![Imgur](http://i.imgur.com/sPStcMD.png)
+![Imgur](http://i.imgur.com/sPStcMD.png)  
 **1042 行動應用程式開發-專題作業**  
 第21組  
 D0308897 楊易哲 gazer099  
