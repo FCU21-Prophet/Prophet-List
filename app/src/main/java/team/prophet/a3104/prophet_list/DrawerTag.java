@@ -3,15 +3,14 @@ package team.prophet.a3104.prophet_list;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -120,7 +119,7 @@ public class DrawerTag extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == MainActivity.ACTIVITY_UPDATE)
         {
-            tag = data.getStringExtra(newTask.TAG_RESULT);
+            String tag_edit = data.getStringExtra(newTask.TAG_RESULT);
             String title = data.getStringExtra(newTask.TITLE_RESULT);
             String content = data.getStringExtra(newTask.CONTENT_RESULT);
             long id = data.getLongExtra(newTask.UPDATE_ID, -1);
@@ -148,7 +147,7 @@ public class DrawerTag extends AppCompatActivity
             if(!(content.equals("")) && id != -1)
             {
                 PhList item = new PhList();
-                item.setTag(tag);
+                item.setTag(tag_edit);
                 item.setListTitle(title);
                 item.setListContent(content);
                 item.setDate(date);
