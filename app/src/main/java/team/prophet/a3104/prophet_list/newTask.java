@@ -6,8 +6,12 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,7 +74,7 @@ public class newTask extends AppCompatActivity {
 
         btn_create.setOnClickListener(create);
         tag.setOnItemSelectedListener(tag_listener);
-      //  project.setOnItemSelectedListener(project_listener);
+        //  project.setOnItemSelectedListener(project_listener);
         btn_settime.setOnClickListener(settime);
 
         alarm_intent = new Intent();
@@ -110,7 +114,19 @@ public class newTask extends AppCompatActivity {
 
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {   //確定按下退出鍵
+
+            setResult(RESULT_CANCELED, intent);
+            finish();
+            return true;
+
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
 
     private View.OnClickListener create = new View.OnClickListener()
     {
@@ -136,7 +152,7 @@ public class newTask extends AppCompatActivity {
                 alarm_intent.putExtra(TITLE_RESULT,rt_title);
                 alarm_intent.putExtra(CONTENT_RESULT, rt_content);
 
-                pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, 0);
+                pi = PendingIntent.getBroadcast(newTask.this, 1, alarm_intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
             }
