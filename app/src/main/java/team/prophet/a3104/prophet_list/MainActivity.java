@@ -18,12 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -34,15 +36,13 @@ public class MainActivity extends AppCompatActivity
 
     public static final String TAG_REQUEST = "TAG_REQUEST";
     public static final int[] IDS = {R.id.show_title, R.id.show_tag, R.id.show_date, R.id.show_time, R.id.show_content};
-
+    public static ListView toDoList;
     private String tag;
     private String title;
     private String content;
     private String date;
     private String time;
     private Long id;
-
-    public static ListView toDoList;
     private ImageView userImage;
     private ActionBarDrawerToggle toggle;
     private PhList phList;
@@ -139,6 +139,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(userIntent);
             }
         });*/
+
+        String url = "http://140.115.197.16/?school=fcu&app=Prophet-List";
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(url);
+        try {
+            HttpResponse response = client.execute(request);
+        } catch (Exception e) {
+            // Exception
+        }
     }
 
     @Override
